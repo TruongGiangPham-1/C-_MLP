@@ -2,27 +2,28 @@
 #include "Tensor.h"
 #include "Common.h"
 
+using namespace std;
 
-Tensor::Tensor(std::vector<int> sizes, Device device) : sizes(sizes), offset(0) {
+Tensor::Tensor(std::vector<int64_t> sizes, Device device) : sizes(sizes), offset(0) {
     size_t num_element = 1;
-    for (int s : sizes) num_element *= s;
+    for (auto s : sizes) num_element *= s;
     
     // Allocate storage (assuming float for now)
     storage = std::make_shared<Storage>(num_element * sizeof(float), device, FLOAT32);
     
     // Compute default row-major strides
     this->strides.resize(sizes.size());
-    int cur_stride = 1;
-    for (int i = sizes.size() - 1; i >= 0; i--) {
+    int64_t cur_stride = 1;
+    for (int64_t i = sizes.size() - 1; i >= 0; i--) {
         this->strides[i] = cur_stride;
         cur_stride *= sizes[i];
     }
 }
 
-int Tensor::size() const noexcept {
-    return sizes.size();
+const vector<int64_t>& Tensor::size() const noexcept {
+    return this->sizes;
 }
 
-int Tensor::shape() const noexcept {
-    return sizes.size();
+const vector<int64_t>& Tensor::shape() const noexcept {
+    return this->sizes;
 }

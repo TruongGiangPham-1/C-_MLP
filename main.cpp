@@ -7,9 +7,10 @@ using namespace std;
 
 int main() {
     Device device = CPU;
-    vector<int> shape = {2, 2};
+    vector<int64_t> shape = {2, 2};
     Tensor a(shape, device);
 
-    printf("a dim %d\n", a.shape());
+    auto dim = a.size();
+    cout << "size" << dim[0] << ", " << dim[1] << endl;
     return 0;
 }
