@@ -20,6 +20,28 @@ Tensor::Tensor(std::vector<int64_t> sizes, Device device) : sizes(sizes), offset
     }
 }
 
+Tensor Tensor::operator+(const Tensor& other) {
+    // Simple element-wise addition (assuming same shape and dtype)
+    //TODO: cant do size comparison like this yet since size is vector
+    //if (this->sizes != other.sizes) {
+    //    throw std::invalid_argument("Tensor sizes do not match for addition");
+    //}
+
+    Tensor result(this->sizes, this->storage->device);
+    size_t num_elements = 1;
+    for (auto s : this->sizes) num_elements *= s;
+
+    float* this_data = static_cast<float*>(this->storage->data);
+    float* other_data = static_cast<float*>(other.storage->data);
+    float* result_data = static_cast<float*>(result.storage->data);
+
+    for (size_t i = 0; i < num_elements; i++) {
+        result_data[i] = this_data[i] + other_data[i];
+    }
+
+    return result;
+}
+
 const vector<int64_t>& Tensor::size() const noexcept {
     return this->sizes;
 }

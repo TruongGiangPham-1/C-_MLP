@@ -19,4 +19,6 @@ public:
     Tensor(std::vector<int64_t> sizes, Device device);
     const std::vector<int64_t>& size() const noexcept; 
     const std::vector<int64_t>& shape() const noexcept;
+
+    Tensor operator+(const Tensor& other);
 };

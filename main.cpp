@@ -12,5 +12,11 @@ int main() {
 
     auto dim = a.size();
     cout << "size" << dim[0] << ", " << dim[1] << endl;
+
+    Tensor b(shape, device);
+
+    // add thensor
+    Tensor c = a + b;
+    cout << c << endl;
     return 0;
 }
