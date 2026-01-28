@@ -1,8 +1,9 @@
 
 #include "Storage.h"
+#include "Common.h"
 
 // constructor
-Storage::Storage(size_t size, Device device) {
+Storage::Storage(size_t size, Device device, DTYPE dtype) : size(size), device(device), dtype(dtype) {
     // Implementation for allocating storage based on device type
     if (device == CPU) {
         // Allocate CPU memory

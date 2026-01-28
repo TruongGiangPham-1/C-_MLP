@@ -10,4 +10,6 @@ include_directories(${PROJECT_SOURCE_DIR}/include)
 
 add_executable(C_MLP 
     ${PROJECT_SOURCE_DIR}/main.cpp
+    ${PROJECT_SOURCE_DIR}/src/Tensor.cpp
+    ${PROJECT_SOURCE_DIR}/src/Storage.cpp
 )

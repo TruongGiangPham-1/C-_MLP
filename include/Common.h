@@ -8,4 +8,9 @@ enum Device {
     CUDA
 };
 
+enum DTYPE {
+    FLOAT32,
+    INT32,
+};
+
 #endif

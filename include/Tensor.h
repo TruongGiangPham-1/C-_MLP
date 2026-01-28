@@ -8,9 +8,16 @@
 class Tensor {
 public:
     std::shared_ptr<Storage> storage;
-    std::vector<int> shape;
+    std::vector<int> sizes;
     std::vector<int> strides;
-    size_t offset;
+    size_t offset;  // offset from the start of the storage. Useful for views/slices
+    /*
+        eg: tensor[1, :] slicing rows, we can use offset to point to the start of row 1
+            tensor[:, 1] slicing columns, we use strides to jump to every next element in column 1
+        Good read https://blog.ezyang.com/2019/05/pytorch-internals/
+    */
 
-    Tensor(std::vector<int> shape, Device device);
+    Tensor(std::vector<int> sizes, Device device);
+    int size() const noexcept; 
+    int shape() const noexcept;
 };
